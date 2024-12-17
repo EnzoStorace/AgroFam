@@ -1,0 +1,14 @@
+{% extends 'customer/base.html' %}
+
+{% block title %}
+    Cadastrar novo usuário
+{% endblock %}
+
+{% block content %}
+    <h1>Cadastrar novo usuário</h1>
+    <form class="form-with-validation" action="{% url 'user-register' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="form-submit">Cadastrar</button>
+    </form>
+{% endblock %}

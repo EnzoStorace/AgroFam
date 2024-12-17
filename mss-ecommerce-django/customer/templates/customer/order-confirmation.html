@@ -1,0 +1,17 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+<div class="container mb-5">
+    <h2>Pedido Confirmado</h2>
+    <p>Obrigado pela sua compra! Seu pedido foi confirmado com sucesso.</p>
+    <h3>Detalhes do Pedido</h3>
+    <p><strong>Endereço de Entrega:</strong> {{ order.address }}</p>
+    <ul>
+        {% for order_item in order_items %}
+            <li>{{ order_item.item.name }} (Quantidade: {{ order_item.quantity }})</li>
+        {% endfor %}
+    </ul>
+    <p><strong>Total: </strong>{{ order.price }}</p>
+    <p>Seu pedido será entregue em breve, o pagamento será realizado direto com o entregador.</p>
+</div>
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends 'customer/base.html' %}
+
+{% block title %}
+    Entrar
+{% endblock %}
+
+{% block content %}
+    <h1>Entrar</h1>
+    <form method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+    
+            <input type="text" class="form-control" name="username" placeholder="Insira seu CPF (apenas números)">
+            
+          </div>
+          <div class="mb-3">
+            
+            <input type="password" class="form-control" name="password" placeholder="Insira sua senha">
+          </div>
+          <button type="submit" class="btn btn-outline-primary">Entrar</button>
+        </form>
+{% endblock %}

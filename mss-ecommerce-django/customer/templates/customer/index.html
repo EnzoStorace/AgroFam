@@ -1,0 +1,23 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+<div class="container mb-5">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8 col-sm-12 offset-md-1 p-4 text-center">
+            <h1>AgroFam</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-1">
+        <div class="card col-md-5 col-sm-12 offset-md-1 p-4 text-center">
+            <h2>Comida direto da roça!</h2>
+            {% if user.is_authenticated %}
+            <h2>Bem vindo, {{user.first_name}}</h2>
+            <a href="{% url 'menu' %}" class="btn btn-outline-primary">Faça seu pedido agora!</a>
+            {% else %}
+            <a href="{% url 'user-register' %}" class="btn btn-outline-primary">Cadastre-se</a>
+            <a href="{% url 'menu' %}" class="btn btn-outline-primary">Faça seu pedido agora!</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

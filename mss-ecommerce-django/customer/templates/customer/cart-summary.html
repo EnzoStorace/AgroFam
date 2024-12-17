@@ -1,0 +1,45 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+<div class="container mb-5">
+    <h2>Carrinho</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Preço Unitário</th>
+                <th>Subtotal</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.item.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.item.price }}</td>
+                <td>{{ item.subtotal }}</td>
+                <td>
+                    <form method="POST" action="{% url 'remove_from_cart' item.item.id %}">
+                        {% csrf_token %}
+                        <button type="submit">Remover</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <p>Total: {{ total_price }}</p>  
+    <form method="POST" action="{% url 'finalize_order' %}">
+        {% csrf_token %}
+        <div>
+            <label for="address">Endereço de Entrega:</label>
+            <textarea id="address" name="address" rows="1" cols="50" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-outline-primary">Finalizar Pedido</button>
+    </form>
+    <a href="{% url 'menu' %}" class="btn btn-outline-primary">Voltar a comprar</a>  
+</div>
+{% endblock content %}
