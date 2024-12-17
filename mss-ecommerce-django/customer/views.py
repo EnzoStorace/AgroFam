@@ -9,19 +9,19 @@ from .models import MenuItem, OrderModel, OrderItem
 from .forms import UserRegisterForm
 
 
-# Página Inicial
+
 class Index(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'customer/index.html')
  
    
-# Sobre nós    
+
 class About(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'customer/about.html')
    
    
-# Login 
+
 def login_user(request):
     if request.method == ("POST"):
         username = request.POST['username']
@@ -39,7 +39,7 @@ def login_user(request):
         return render(request, 'customer/login.html', {})
     
     
-# Logout
+
 def logout_user(request):
     logout(request)
     messages.success(request, ("Você foi desconectado de sua conta."))
@@ -74,7 +74,7 @@ class Menu(View):
         return render(request, 'customer/menu.html', context)
 
 
-# Buscar produtos por qualquer atributo
+
 class MenuSearch(View):
     def get(self, request, *args, **kwargs):
         query = self.request.GET.get("q")
@@ -92,8 +92,7 @@ class MenuSearch(View):
 
         return render(request, 'customer/menu.html', context)
     
-    
-# Adiciona um ou mais do memso item no carrinho    
+      
 class AddToCart(View):
     def post(self, request, *args, **kwargs):
         item_id = self.kwargs.get('item_id')
@@ -127,8 +126,7 @@ class AddToCart(View):
 
         return redirect('menu')
     
-    
-# Remove uma unidade de item do carrinho por vez   
+     
 class RemoveFromCart(View):
     def post(self, request, *args, **kwargs):
         item_id = kwargs.get('item_id')  # Obtém o ID do item a ser removido
@@ -155,8 +153,7 @@ class RemoveFromCart(View):
 
         return redirect('cart-summary')
     
-    
-# Carrinho de compras    
+       
 class CartSummary(View):
     def get(self, request, *args, **kwargs):
         cart = request.session.get('cart', {})
@@ -184,7 +181,6 @@ class CartSummary(View):
         return render(request, 'customer/cart-summary.html', context)
     
     
-# Finalizar pedido
 class FinalizeOrder(View):
     def post(self, request, *args, **kwargs):
         cart = request.session.get('cart', {})
@@ -214,7 +210,6 @@ class FinalizeOrder(View):
         return redirect('order-confirmation', order_id=order.id)
     
     
-# Pedido confirmado
 class OrderConfirmation(View):
     def get(self, request, *args, **kwargs):
         order_id = kwargs.get('order_id')
